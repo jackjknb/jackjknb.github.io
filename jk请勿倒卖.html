@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安远县思源实验表白墙</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            min-height: 100vh;
+            padding-bottom: 70px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* 头部样式 */
+        header {
+            text-align: center;
+            padding: 25px 0;
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* 导航栏样式 */
+        .nav-tabs {
+            display: flex;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 18px 5px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab:hover {
+            background: #f5f9ff;
+        }
+        
+        .tab.active {
+            color: #2575fc;
+            border-bottom: 3px solid #2575fc;
+            background: #f0f7ff;
+        }
+        
+        /* 内容区域样式 */
+        .content {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            min-height: 400px;
+            display: none;
+        }
+        
+        .content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* 公告板块样式 */
+        .announcement {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .announcement h2 {
+            color: #e67e22;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .announcement p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        /* 帖子样式 */
+        .post {
+            border: 1px solid #eaeaea;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+        
+        .post:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transform: translateY(-3px);
+        }
+        
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .post-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .post-author {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .post-time {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 3px;
+        }
+        
+        .post-content {
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+        
+        /* 发布按钮 */
+        .add-post-btn {
+            position: fixed;
+            bottom: 90px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: 0 5px 15px rgba(37, 117, 252, 0.4);
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .add-post-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        /* 我的板块样式 */
+        .profile-header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+        
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .profile-name {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .profile-info {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        
+        .info-item {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .info-label {
+            font-weight: bold;
+            width: 120px;
+            color: #555;
+        }
+        
+        .info-value {
+            flex: 1;
+        }
+        
+        .edit-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .edit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(37, 117, 252, 0.3);
+        }
+        
+        /* 聊天板块样式 */
+        .chat-container {
+            display: flex;
+            height: 500px;
+            border: 1px solid #eaeaea;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .chat-sidebar {
+            width: 30%;
+            background: #f9f9f9;
+            border-right: 1px solid #eaeaea;
+            overflow-y: auto;
+        }
+        
+        .chat-main {
+            width: 70%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-contact {
+            padding: 15px;
+            border-bottom: 1px solid #eaeaea;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .chat-contact:hover, .chat-contact.active {
+            background: #e6f0ff;
+        }
+        
+        .chat-contact-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .chat-contact-lastmsg {
+            color: #888;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .chat-header {
+            padding: 15px;
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            font-weight: bold;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f5f9ff;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            max-width: 70%;
+        }
+        
+        .message.received {
+            align-self: flex-start;
+        }
+        
+        .message.sent {
+            align-self: flex-end;
+            margin-left: auto;
+        }
+        
+        .message-content {
+            padding: 12px 15px;
+            border-radius: 15px;
+            display: inline-block;
+        }
+        
+        .message.received .message-content {
+            background: white;
+            border-top-left-radius: 5px;
+        }
+        
+        .message.sent .message-content {
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border-top-right-radius: 5px;
+        }
+        
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #eaeaea;
+            background: white;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+            font-size: 1rem;
+        }
+        
+        .chat-input button {
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        /* 模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-header {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #2575fc;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .modal-btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-btn.primary {
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            color: white;
+        }
+        
+        .modal-btn.secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        .modal-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 底部导航 */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            display: flex;
+            padding: 12px 0;
+            box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.08);
+            z-index: 99;
+        }
+        
+        .bottom-nav-item {
+            flex: 1;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .bottom-nav-item.active {
+            color: #2575fc;
+        }
+        
+        .bottom-nav-icon {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-tabs {
+                display: none;
+            }
+            
+            .bottom-nav {
+                display: flex;
+            }
+            
+            .chat-container {
+                flex-direction: column;
+                height: 600px;
+            }
+            
+            .chat-sidebar, .chat-main {
+                width: 100%;
+            }
+            
+            .chat-sidebar {
+                height: 40%;
+            }
+            
+            .chat-main {
+                height: 60%;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .bottom-nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>安远县思源实验表白墙</h1>
+            <p class="subtitle">表达你的心意，分享你的故事</p>
+        </header>
+        
+        <!-- 桌面导航 -->
+        <div class="nav-tabs">
+            <div class="tab active" data-tab="announcement">公告</div>
+            <div class="tab" data-tab="posts">发帖</div>
+            <div class="tab" data-tab="profile">我的</div>
+            <div class="tab" data-tab="chat">聊天</div>
+        </div>
+        
+        <!-- 公告板块 -->
+        <div class="content active" id="announcement-content">
+            <div class="announcement">
+                <h2>网站公告</h2>
+                <p>本网站为 jk大牛制作，如有bug请反馈（真的会回）</p>
+                <p style="margin-top: 15px; font-size: 1rem; color: #666;">反馈方式：点击下方"我的"板块，编辑个人信息时填写反馈内容</p>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <h3 style="color: #2575fc; margin-bottom: 20px;">使用说明</h3>
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+                    <div style="flex: 1; min-width: 200px; background: #f0f7ff; padding: 20px; border-radius: 10px;">
+                        <i class="fas fa-bullhorn" style="font-size: 2rem; color: #6a11cb; margin-bottom: 15px;"></i>
+                        <h4>查看公告</h4>
+                        <p>了解网站最新信息和使用规则</p>
+                    </div>
+                    <div style="flex: 1; min-width: 200px; background: #f0f7ff; padding: 20px; border-radius: 10px;">
+                        <i class="fas fa-pencil-alt" style="font-size: 2rem; color: #6a11cb; margin-bottom: 15px;"></i>
+                        <h4>发布帖子</h4>
+                        <p>点击发帖板块，左下角加号即可发帖</p>
+                    </div>
+                    <div style="flex: 1; min-width: 200px; background: #f0f7ff; padding: 20px; border-radius: 10px;">
+                        <i class="fas fa-user-circle" style="font-size: 2rem; color: #6a11cb; margin-bottom: 15px;"></i>
+                        <h4>个人资料</h4>
+                        <p>在我的板块填写个人信息</p>
+                    </div>
+                    <div style="flex: 1; min-width: 200px; background: #f0f7ff; padding: 20px; border-radius: 10px;">
+                        <i class="fas fa-comments" style="font-size: 2rem; color: #6a11cb; margin-bottom: 15px;"></i>
+                        <h4>实时聊天</h4>
+                        <p>添加好友，发送消息和表情</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 发帖板块 -->
+        <div class="content" id="posts-content">
+            <h2 style="margin-bottom: 25px; color: #2575fc;">表白墙帖子</h2>
+            
+            <div id="posts-list">
+                <!-- 帖子会动态加载到这里 -->
+            </div>
+        </div>
+        
+        <!-- 我的板块 -->
+        <div class="content" id="profile-content">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h2 class="profile-name" id="profile-name">未设置用户名</h2>
+                <p style="color: #888;" id="profile-bio">暂无简介</p>
+            </div>
+            
+            <div class="profile-info">
+                <div class="info-item">
+                    <div class="info-label">年龄</div>
+                    <div class="info-value" id="info-age">未填写</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">学校</div>
+                    <div class="info-value" id="info-school">未填写</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">QQ号</div>
+                    <div class="info-value" id="info-qq">未填写</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">手机号码</div>
+                    <div class="info-value" id="info-phone">未填写</div>
+                </div>
+            </div>
+            
+            <button class="edit-btn" id="edit-profile-btn">编辑个人信息</button>
+        </div>
+        
+        <!-- 聊天板块 -->
+        <div class="content" id="chat-content">
+            <h2 style="margin-bottom: 25px; color: #2575fc;">聊天</h2>
+            
+            <div class="chat-container">
+                <div class="chat-sidebar">
+                    <div class="chat-contact active" data-contact="1">
+                        <div class="chat-contact-name">王小萌</div>
+                        <div class="chat-contact-lastmsg">你好呀！在干嘛呢？</div>
+                    </div>
+                    <div class="chat-contact" data-contact="2">
+                        <div class="chat-contact-name">李思源</div>
+                        <div class="chat-contact-lastmsg">今天的数学作业你写了吗？</div>
+                    </div>
+                    <div class="chat-contact" data-contact="3">
+                        <div class="chat-contact-name">张明轩</div>
+                        <div class="chat-contact-lastmsg">周末一起去图书馆吗？</div>
+                    </div>
+                    <div class="chat-contact" data-contact="4">
+                        <div class="chat-contact-name">刘雨欣</div>
+                        <div class="chat-contact-lastmsg">😊 表情测试</div>
+                    </div>
+                </div>
+                
+                <div class="chat-main">
+                    <div class="chat-header" id="chat-header">与 王小萌 聊天中</div>
+                    
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="message received">
+                            <div class="message-content">你好！欢迎使用安远县思源实验表白墙聊天功能！</div>
+                        </div>
+                        <div class="message received">
+                            <div class="message-content">我是王小萌，有什么需要帮助的吗？</div>
+                        </div>
+                        <div class="message sent">
+                            <div class="message-content">你好，这个表白墙网站真不错！</div>
+                        </div>
+                        <div class="message received">
+                            <div class="message-content">谢谢！记得多来发帖哦 😊</div>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-input">
+                        <input type="text" id="chat-input" placeholder="输入消息...">
+                        <button id="send-btn"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 发布帖子按钮（只在发帖板块显示） -->
+        <div class="add-post-btn" id="add-post-btn">
+            <i class="fas fa-plus"></i>
+        </div>
+        
+        <!-- 移动端底部导航 -->
+        <div class="bottom-nav">
+            <div class="bottom-nav-item active" data-tab="announcement">
+                <div class="bottom-nav-icon"><i class="fas fa-bullhorn"></i></div>
+                <div>公告</div>
+            </div>
+            <div class="bottom-nav-item" data-tab="posts">
+                <div class="bottom-nav-icon"><i class="fas fa-pencil-alt"></i></div>
+                <div>发帖</div>
+            </div>
+            <div class="bottom-nav-item" data-tab="profile">
+                <div class="bottom-nav-icon"><i class="fas fa-user"></i></div>
+                <div>我的</div>
+            </div>
+            <div class="bottom-nav-item" data-tab="chat">
+                <div class="bottom-nav-icon"><i class="fas fa-comments"></i></div>
+                <div>聊天</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 发布帖子模态框 -->
+    <div class="modal" id="post-modal">
+        <div class="modal-content">
+            <div class="modal-header">发布新帖子</div>
+            <div class="form-group">
+                <label for="post-author">你的名字</label>
+                <input type="text" id="post-author" placeholder="请输入你的名字">
+            </div>
+            <div class="form-group">
+                <label for="post-content">帖子内容</label>
+                <textarea id="post-content" placeholder="想说的话..."></textarea>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn secondary" id="cancel-post">取消</button>
+                <button class="modal-btn primary" id="submit-post">发布</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 编辑个人信息模态框 -->
+    <div class="modal" id="profile-modal">
+        <div class="modal-content">
+            <div class="modal-header">编辑个人信息</div>
+            <div class="form-group">
+                <label for="edit-name">姓名</label>
+                <input type="text" id="edit-name" placeholder="请输入你的姓名">
+            </div>
+            <div class="form-group">
+                <label for="edit-bio">简介</label>
+                <input type="text" id="edit-bio" placeholder="简单介绍一下自己">
+            </div>
+            <div class="form-group">
+                <label for="edit-age">年龄</label>
+                <input type="number" id="edit-age" placeholder="请输入年龄">
+            </div>
+            <div class="form-group">
+                <label for="edit-school">学校</label>
+                <input type="text" id="edit-school" placeholder="请输入学校名称">
+            </div>
+            <div class="form-group">
+                <label for="edit-qq">QQ号</label>
+                <input type="text" id="edit-qq" placeholder="请输入QQ号">
+            </div>
+            <div class="form-group">
+                <label for="edit-phone">手机号码</label>
+                <input type="tel" id="edit-phone" placeholder="请输入手机号码">
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn secondary" id="cancel-edit">取消</button>
+                <button class="modal-btn primary" id="save-profile">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 初始帖子数据
+        const initialPosts = [
+            {
+                id: 1,
+                author: "匿名用户",
+                content: "今天在操场看到你打篮球的样子好帅，可以认识一下吗？",
+                time: "2小时前",
+                avatar: "匿"
+            },
+            {
+                id: 2,
+                author: "初三(5)班某同学",
+                content: "感谢同桌帮我补习数学，这次考试进步了20分！",
+                time: "5小时前",
+                avatar: "同"
+            },
+            {
+                id: 3,
+                author: "默默关注你的人",
+                content: "每天最期待的就是课间操时间，因为能看到你。希望你天天开心！",
+                time: "1天前",
+                avatar: "默"
+            },
+            {
+                id: 4,
+                author: "思源学子",
+                content: "寻找一起学习的小伙伴，周末图书馆约起来！",
+                time: "2天前",
+                avatar: "学"
+            }
+        ];
+
+        // 当前用户信息
+        let userProfile = {
+            name: "未设置用户名",
+            bio: "暂无简介",
+            age: "",
+            school: "",
+            qq: "",
+            phone: ""
+        };
+
+        // 聊天数据
+        const chatData = {
+            1: [
+                {sender: "receiver", content: "你好！欢迎使用安远县思源实验表白墙聊天功能！"},
+                {sender: "receiver", content: "我是王小萌，有什么需要帮助的吗？"},
+                {sender: "sender", content: "你好，这个表白墙网站真不错！"},
+                {sender: "receiver", content: "谢谢！记得多来发帖哦 😊"}
+            ],
+            2: [
+                {sender: "receiver", content: "你好，我是李思源"},
+                {sender: "receiver", content: "今天的数学作业你写了吗？"}
+            ],
+            3: [
+                {sender: "receiver", content: "你好，我是张明轩"},
+                {sender: "receiver", content: "周末一起去图书馆吗？"}
+            ],
+            4: [
+                {sender: "receiver", content: "你好，我是刘雨欣"},
+                {sender: "receiver", content: "😊 表情测试"}
+            ]
+        };
+
+        // DOM元素
+        const tabs = document.querySelectorAll('.tab, .bottom-nav-item');
+        const contents = document.querySelectorAll('.content');
+        const addPostBtn = document.getElementById('add-post-btn');
+        const postModal = document.getElementById('post-modal');
+        const cancelPostBtn = document.getElementById('cancel-post');
+        const submitPostBtn = document.getElementById('submit-post');
+        const editProfileBtn = document.getElementById('edit-profile-btn');
+        const profileModal = document.getElementById('profile-modal');
+        const cancelEditBtn = document.getElementById('cancel-edit');
+        const saveProfileBtn = document.getElementById('save-profile');
+        const postsList = document.getElementById('posts-list');
+        const chatContacts = document.querySelectorAll('.chat-contact');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatHeader = document.getElementById('chat-header');
+        const chatInput = document.getElementById('chat-input');
+        const sendBtn = document.getElementById('send-btn');
+
+        // 当前激活的聊天联系人
+        let activeChatContact = 1;
+
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', function() {
+            // 加载帖子
+            loadPosts();
+            
+            // 加载用户信息
+            loadProfile();
+            
+            // 绑定事件
+            bindEvents();
+            
+            // 默认显示第一个聊天对话
+            loadChatMessages(1);
+        });
+
+        // 加载帖子
+        function loadPosts() {
+            postsList.innerHTML = '';
+            
+            // 从localStorage获取帖子或使用初始数据
+            let posts = JSON.parse(localStorage.getItem('ayxbq_posts')) || initialPosts;
+            
+            if (posts.length === 0) {
+                postsList.innerHTML = '<p style="text-align: center; color: #888; padding: 40px 0;">还没有帖子，快来发布第一个吧！</p>';
+                return;
+            }
+            
+            // 显示帖子
+            posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'post';
+                postElement.innerHTML = `
+                    <div class="post-header">
+                        <div class="post-avatar">${post.avatar}</div>
+                        <div>
+                            <div class="post-author">${post.author}</div>
+                            <div class="post-time">${post.time}</div>
+                        </div>
+                    </div>
+                    <div class="post-content">${post.content}</div>
+                `;
+                postsList.appendChild(postElement);
+            });
+            
+            // 保存帖子到localStorage
+            localStorage.setItem('ayxbq_posts', JSON.stringify(posts));
+        }
+
+        // 加载用户信息
+        function loadProfile() {
+            // 从localStorage获取用户信息
+            const savedProfile = localStorage.getItem('ayxbq_profile');
+            if (savedProfile) {
+                userProfile = JSON.parse(savedProfile);
+            }
+            
+            // 更新显示
+            document.getElementById('profile-name').textContent = userProfile.name;
+            document.getElementById('profile-bio').textContent = userProfile.bio;
+            document.getElementById('info-age').textContent = userProfile.age || '未填写';
+            document.getElementById('info-school').textContent = userProfile.school || '未填写';
+            document.getElementById('info-qq').textContent = userProfile.qq || '未填写';
+            document.getElementById('info-phone').textContent = userProfile.phone || '未填写';
+        }
+
+        // 绑定事件
+        function bindEvents() {
+            // 标签页切换
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabName = this.getAttribute('data-tab');
+                    
+                    // 更新标签状态
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 更新内容显示
+                    contents.forEach(content => content.classList.remove('active'));
+                    document.getElementById(`${tabName}-content`).classList.add('active');
+                    
+                    // 显示/隐藏发布按钮
+                    if (tabName === 'posts') {
+                        addPostBtn.style.display = 'flex';
+                    } else {
+                        addPostBtn.style.display = 'none';
+                    }
+                    
+                    // 如果是聊天板块，重新加载当前聊天
+                    if (tabName === 'chat') {
+                        loadChatMessages(activeChatContact);
+                    }
+                });
+            });
+
+            // 发布帖子按钮
+            addPostBtn.addEventListener('click', function() {
+                postModal.classList.add('active');
+                document.getElementById('post-author').value = userProfile.name !== '未设置用户名' ? userProfile.name : '';
+            });
+
+            // 取消发布
+            cancelPostBtn.addEventListener('click', function() {
+                postModal.classList.remove('active');
+                document.getElementById('post-author').value = '';
+                document.getElementById('post-content').value = '';
+            });
+
+            // 提交帖子
+            submitPostBtn.addEventListener('click', function() {
+                const author = document.getElementById('post-author').value.trim();
+                const content = document.getElementById('post-content').value.trim();
+                
+                if (!author || !content) {
+                    alert('请填写完整信息！');
+                    return;
+                }
+                
+                // 创建新帖子
+                const newPost = {
+                    id: Date.now(),
+                    author: author,
+                    content: content,
+                    time: '刚刚',
+                    avatar: author.charAt(0)
+                };
+                
+                // 获取现有帖子
+                let posts = JSON.parse(localStorage.getItem('ayxbq_posts')) || initialPosts;
+                posts.unshift(newPost); // 添加到开头
+                
+                // 保存到localStorage
+                localStorage.setItem('ayxbq_posts', JSON.stringify(posts));
+                
+                // 重新加载帖子
+                loadPosts();
+                
+                // 关闭模态框
+                postModal.classList.remove('active');
+                document.getElementById('post-author').value = '';
+                document.getElementById('post-content').value = '';
+                
+                alert('帖子发布成功！');
+            });
+
+            // 编辑个人信息
+            editProfileBtn.addEventListener('click', function() {
+                document.getElementById('edit-name').value = userProfile.name;
+                document.getElementById('edit-bio').value = userProfile.bio;
+                document.getElementById('edit-age').value = userProfile.age;
+                document.getElementById('edit-school').value = userProfile.school;
+                document.getElementById('edit-qq').value = userProfile.qq;
+                document.getElementById('edit-phone').value = userProfile.phone;
+                
+                profileModal.classList.add('active');
+            });
+
+            // 取消编辑
+            cancelEditBtn.addEventListener('click', function() {
+                profileModal.classList.remove('active');
+            });
+
+            // 保存个人信息
+            saveProfileBtn.addEventListener('click', function() {
+                userProfile.name = document.getElementById('edit-name').value.trim() || '未设置用户名';
+                userProfile.bio = document.getElementById('edit-bio').value.trim() || '暂无简介';
+                userProfile.age = document.getElementById('edit-age').value.trim();
+                userProfile.school = document.getElementById('edit-school').value.trim();
+                userProfile.qq = document.getElementById('edit-qq').value.trim();
+                userProfile.phone = document.getElementById('edit-phone').value.trim();
+                
+                // 保存到localStorage
+                localStorage.setItem('ayxbq_profile', JSON.stringify(userProfile));
+                
+                // 更新显示
+                loadProfile();
+                
+                // 关闭模态框
+                profileModal.classList.remove('active');
+                
+                alert('个人信息保存成功！');
+            });
+
+            // 聊天联系人切换
+            chatContacts.forEach(contact => {
+                contact.addEventListener('click', function() {
+                    const contactId = parseInt(this.getAttribute('data-contact'));
+                    
+                    // 更新联系人状态
+                    chatContacts.forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 加载聊天消息
+                    loadChatMessages(contactId);
+                    activeChatContact = contactId;
+                });
+            });
+
+            // 发送消息
+            function sendMessage() {
+                const message = chatInput.value.trim();
+                if (!message) return;
+                
+                // 添加到当前聊天
+                if (!chatData[activeChatContact]) {
+                    chatData[activeChatContact] = [];
+                }
+                
+                chatData[activeChatContact].push({
+                    sender: 'sender',
+                    content: message
+                });
+                
+                // 清空输入框
+                chatInput.value = '';
+                
+                // 重新加载消息
+                loadChatMessages(activeChatContact);
+                
+                // 模拟回复（仅示例）
+                setTimeout(() => {
+                    const replies = [
+                        "收到你的消息了！",
+                        "嗯嗯，我明白了。",
+                        "这个想法不错！",
+                        "谢谢分享！",
+                        "😊",
+                        "👍"
+                    ];
+                    
+                    const randomReply = replies[Math.floor(Math.random() * replies.length)];
+                    
+                    chatData[activeChatContact].push({
+                        sender: 'receiver',
+                        content: randomReply
+                    });
+                    
+                    loadChatMessages(activeChatContact);
+                }, 1000);
+            }
+
+            sendBtn.addEventListener('click', sendMessage);
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+        }
+
+        // 加载聊天消息
+        function loadChatMessages(contactId) {
+            // 清空当前消息
+            chatMessages.innerHTML = '';
+            
+            // 更新聊天标题
+            const contactName = document.querySelector(`.chat-contact[data-contact="${contactId}"] .chat-contact-name`).textContent;
+            chatHeader.textContent = `与 ${contactName} 聊天中`;
+            
+            // 获取消息
+            const messages = chatData[contactId] || [];
+            
+            // 显示消息
+            messages.forEach(message => {
+                const messageElement = document.createElement('div');
+                messageElement.className = `message ${message.sender}`;
+                messageElement.innerHTML = `<div class="message-content">${message.content}</div>`;
+                chatMessages.appendChild(messageElement);
+            });
+            
+            // 滚动到底部
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+    </script>
+</body>
+</html>
